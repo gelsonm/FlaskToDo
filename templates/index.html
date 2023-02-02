@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+
+{% block head %}
+
+{% endblock %}
+
+
+{% block body %}
+<div class="wrapper">
+  <form class="" action="/" method="POST">
+    <div class="task-input">
+      <img src="{{ url_for('static', filename='bars-icon.svg') }}" alt="icon">
+      <input type="text" placeholder="Add a new task" name="content" id="content">
+    </div>
+  </form>
+
+    <div class="controls">
+      <div class="filters">
+        <span class="active" id="all">All</span>
+        <span id="pending">Pending</span>
+        <span id="completed">Completed</span>
+      </div>
+      <button class="clear-btn">Clear All</button>
+    </div>
+    <ul class="task-box">
+      {% if tasks|length < 1 %}
+        <p>There are no tasks, create one.</p>
+      {% else %}
+      {% for task in tasks %}
+        <li class="task">
+          {{ task.content }}
+          <a href="/delete/{{ task.id }}" style="float:right">Delete/</a>
+          <a href="/update/{{ task.id }}" style="">Update</a>
+        </li>
+      {% endfor %}
+      {% endif %}
+    </ul>
+  </div>
+
+<!-- <div class="content">
+  <h1 class="text-align:center">Task Master</h1>
+
+  {% if tasks|length < 1 %}
+  <h4>There are no tasks, create one.</h4>
+  {% else %}
+  <table>
+    <tr>
+      <th>Task</th>
+      <th>Added</th>
+      <th>Actions</th>
+    </tr>
+    {% for task in tasks %}
+      <tr>
+        <td>{{ task.content }}</td>
+        <td>{{ task.date_created.date() }}</td>
+        <td>
+          <a href="/delete/{{ task.id }}">Delete</a>
+          <br>
+          <a href="/update/{{ task.id }}">Update</a>
+        </td>
+      </tr>
+    {% endfor %}
+  </table>
+  {% endif %}
+
+  <form class="" action="/" method="POST">
+      <input type="text" name="content" id="content">
+      <input type="submit" value="Add Task">
+  </form>
+
+</div> -->
+
+{% endblock %}
